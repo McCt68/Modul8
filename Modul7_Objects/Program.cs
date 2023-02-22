@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Modul8;
+using System;
+using System.Runtime.ConstrainedExecution;
 
 namespace Modul7_Objects
 {
@@ -156,7 +158,7 @@ namespace Modul7_Objects
                     // Få længden på teksten i array index i
                     Console.WriteLine("Længden på den indtaste text er: {0} tegn", indtastedeTekster[i].Length);
 
-                    if ( i == 0 || indtastedeTekster[i].Length < kortesteTekst.Length)
+                    if (i == 0 || indtastedeTekster[i].Length < kortesteTekst.Length)
                     {
                         // korteste = indtastedeTekster[i].Length;
                         kortesteTekst = indtastedeTekster[i];
@@ -164,7 +166,7 @@ namespace Modul7_Objects
 
                 }
                 Console.WriteLine("Den korteste text var: {0} tegn. Den var: {1} chars lang"
-                    , kortesteTekst, kortesteTekst.Length); 
+                    , kortesteTekst, kortesteTekst.Length);
 
 
             }
@@ -178,32 +180,135 @@ namespace Modul7_Objects
                 int[] mineTal = new int[13];
                 Random myRandom = new Random();
 
-                for(int i = 0; i < mineTal.Length; i++)
+                for (int i = 0; i < mineTal.Length; i++)
                 {
                     mineTal[i] = i;
-                        
+
                 }
 
-                mineTal = mineTal.OrderBy( x => myRandom.Next()).ToArray();
-                
-                foreach(int i in mineTal) { Console.WriteLine(i + 1); }
-                
-            
+                mineTal = mineTal.OrderBy(x => myRandom.Next()).ToArray();
+
+                foreach (int i in mineTal) { Console.WriteLine(i + 1); }
+
+
             }
 
             // Øvelse 7
-            static void ExersizeSeven() { }
+            static void ExersizeSeven()
+            {
+                Console.Clear();
+                Console.WriteLine("Øvelse 7.");
+
+                // Lav et program, hvor brugeren kan indtaste 5 tekster.
+                // Programmet skal derefter udskrive teksterne i tilfældig orden.
+
+                string[] tekster = new string[5];
+                Random myRandom = new Random();
+
+                for(int i = 0; i < tekster.Length; i++)
+                {
+                    Console.WriteLine("Indtast tekst nr {0}", tekster[i]);
+                    tekster[i] = Console.ReadLine();
+                }
+
+                tekster = tekster.OrderBy(x => myRandom.Next()).ToArray();
+
+                foreach(string tekst in tekster) { Console.WriteLine(tekst); }               
+            }
 
             // Øvelse 8
-            static void ExersizeEight() { }
+            static void ExersizeEight()
+            {
+                Console.Clear();
+                Console.WriteLine("Øvelse 8.");
+
+                // Lav et program, som kan opfinde beskrivelser af ting.
+                // En beskrivelse består af en størrelse -
+                // (kæmpestor, stor, lille, lillebitte) en farve (rød, gul, grøn) -
+                // og en type (kasse, bold, rygsæk, bil, legeplads).
+                // Lav programmet så det udskriver 10 tilfældige beskrivelser.
+
+                Ting[] listeMedTing = new Ting[10];
+                string[] størrelse = {"Stor", "Lille", "Lillebitte"};
+                string[] farve = {"Rød", "Gul", "Grøn"};
+                string[] tingType = {"Kasse", "Bold", "Rygsæk", "Bil", "Legeplads"};
+                Random myRandomizer = new Random();              
+                                             
+
+                for(int i = 0;i < 10;i++) {
+
+                    størrelse = størrelse.OrderBy(x => myRandomizer.Next(0, størrelse.Length - 1)).ToArray();
+                    farve = farve.OrderBy(x => myRandomizer.Next()).ToArray();
+                    tingType = tingType.OrderBy(x => myRandomizer.Next()).ToArray();
+
+                    listeMedTing[i] = new Ting(størrelse[0], farve[0], tingType[0] );
+                    Console.WriteLine(listeMedTing[i]);
+
+                    //if (Array.IndexOf  listeMedTing[i]  ){
+                    //    Console.WriteLine("eksisterer allerede");
+                        
+                    //}
+                }
+                
+
+                //Kan du udvide programmet, så det sikrer, at der kommer 10 forskellige, tilfældige beskrivelser?
+            }
 
             // Øvelse 9
-            static void ExersizeNine() { }
+            static void ExersizeNine()
+            {
+                Console.Clear();
+                Console.WriteLine("Øvelse 9.");
+
+                int[] indtastedeTal = new int[10];
+
+
+                for (int tal = 0; tal < 10; tal++)
+                {
+
+                    Console.WriteLine("\nIndtast tal:");
+                    indtastedeTal[tal] = Convert.ToInt32(Console.ReadLine());
+
+                    for (int j = 0; j <= tal; j++)
+                    {
+                        Console.Write("Dine tal indtal videre: {0}, ", indtastedeTal[j]);
+                    }
+
+                }
+            }
 
             // Øvelse 10
-            static void ExersizeTen() { }
+            static void ExersizeTen()
+            {
+                Console.Clear();
+                Console.WriteLine("Øvelse 10.");
+
+                int[] mineFireTal = new int[4];
 
 
+                for (int i = 0; i < mineFireTal.Length; i++)
+                {
+                    Console.WriteLine("indtast tal {0}", i);
+                    mineFireTal[i] = Convert.ToInt32(Console.ReadLine());
+                }
+
+                int midlertidigObevaring1 = mineFireTal[0];
+                int midlertidigObevaring2 = mineFireTal[2];
+
+                mineFireTal[0] = mineFireTal[1];
+                mineFireTal[1] = midlertidigObevaring1;
+                mineFireTal[2] = mineFireTal[3];
+                mineFireTal[3] = midlertidigObevaring2;
+
+                Console.WriteLine();
+
+                // Udskriv
+                for (int tal = 0; tal < mineFireTal.Length; tal++)
+                {
+                    Console.WriteLine(mineFireTal[tal]);
+                }
+
+            }
         }
     }
 }
